@@ -1,4 +1,4 @@
-def txt_excel(arquivo):
+def txt_excel(arquivo, divisor):
     with open(arquivo, "r") as f:
         file = f.read()
 
@@ -32,7 +32,6 @@ def txt_excel(arquivo):
 
     selected_MSE = []
     selected_Pearsons = []
-    divisor = 5
 
     for i in range(len(MSEs)):
         if (i+1) % divisor == 0:
@@ -47,24 +46,24 @@ def txt_excel(arquivo):
 
     return [selected_MSE, selected_Pearsons]
 
-arquivos = ["random_tree.txt", "best_trees.txt", "best_forests.txt"]
+arquivos = [("random_tree.txt", 5), ("best_trees.txt", 5), ("threshold.txt", 3), ("best_forests.txt", 5)]
 
 resultados = []
 
 for arquivo in arquivos:
-    resultados.append(txt_excel(arquivo))
+    resultados.append(txt_excel(arquivo[0], arquivo[1]))
 
-print(f"MSEs: {len(resultados[0][0])} | {len(resultados[1][0])} | {len(resultados[2][0])}")
-print(f"Pearsons: {len(resultados[0][1])} | {len(resultados[1][1])} | {len(resultados[2][1])}")
+print(f"MSEs: {len(resultados[0][0])} | {len(resultados[1][0])} | {len(resultados[2][0])} | {len(resultados[3][0])}")
+print(f"Pearsons: {len(resultados[0][1])} | {len(resultados[1][1])} | {len(resultados[2][1])} | {len(resultados[3][1])}")
 
 file_name = "SOX.csv"
 
 csv_file = ""
 
-csv_file += "MSE Random_Tree,MSE Best_Trees,MSE Best_Forests,Pearson Random_Tree,Pearson Best_Trees,Pearson Best_Forests\n"
+csv_file += "MSE Random_Tree,MSE Best_Trees,MSE Threshold,MSE Best_Forests,Pearson Random_Tree,Pearson Best_Trees,Pearson Threshold,Pearson Best_Forests\n"
 
 for i in range(len(resultados[0][0])):
-  csv_file += f"{resultados[0][0][i]}, {resultados[1][0][i]}, {resultados[2][0][i]}, {resultados[0][1][i]}, {resultados[1][1][i]}, {resultados[2][1][i]}\n"
+  csv_file += f"{resultados[0][0][i]}, {resultados[1][0][i]}, {resultados[2][0][i]}, {resultados[3][0][i]}, {resultados[0][1][i]}, {resultados[1][1][i]}, {resultados[2][1][i]}, {resultados[3][1][i]}\n"
 
 with open(file_name, "w") as f:
   f.write(csv_file)
