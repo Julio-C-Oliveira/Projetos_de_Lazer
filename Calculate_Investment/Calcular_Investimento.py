@@ -24,6 +24,8 @@ class Calcular_Investimento:
 
   def incidir_inflacao(self, montante, taxaInflacionariaAnual):
     tempo = self.tempoEmAnos*12+self.tempoEmMeses
+    print(f"\nMontante: {montante}\nInflação: {taxaInflacionariaAnual/12}\nTempo: {tempo}\n")
+    print(f"Resultado: {montante*(1-(taxaInflacionariaAnual/12))**(tempo)}")
     return montante*(1-(taxaInflacionariaAnual/12))**(tempo)
 
   def renda_passiva_gerada(self, montante):

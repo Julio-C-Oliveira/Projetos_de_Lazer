@@ -32,11 +32,10 @@ class Replacement:
         word = word.replace('X','9')
         word = word.replace('Y','9')
         word = word.replace('Z','9')
-
         if overwriteWord:
             self.word = word
-
         return word
 
-replace = Replacement("Bleach Chii Date Live Zero")
-print(replace.letterToNumber())
+if __name__ == "__main__":
+    replace = Replacement("Tohka")
+    print(replace.letterToNumber())
